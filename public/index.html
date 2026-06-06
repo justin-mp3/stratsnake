@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slither Prompt Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>SLITHER PROMPT ARENA</h1>
+      <p class="subtitle">Your 50-character strategy. Claude's code. Live competition.</p>
+    </header>
+
+    <div id="main">
+      <div id="canvas-wrap">
+        <canvas id="canvas" width="640" height="640"></canvas>
+        <div id="join-overlay">
+          <div id="join-box">
+            <h2>Enter the Arena</h2>
+            <input id="name-input" type="text" maxlength="16" placeholder="Your name" value="Player" />
+            <div id="color-row">
+              <span>Color:</span>
+              <div class="color-swatch" style="background:#4dabf7" data-color="#4dabf7"></div>
+              <div class="color-swatch" style="background:#a9e34b" data-color="#a9e34b"></div>
+              <div class="color-swatch" style="background:#e599f7" data-color="#e599f7"></div>
+              <div class="color-swatch" style="background:#ffd43b" data-color="#ffd43b"></div>
+              <div class="color-swatch" style="background:#63e6be" data-color="#63e6be"></div>
+              <div class="color-swatch" style="background:#ff8787" data-color="#ff8787"></div>
+            </div>
+            <button id="join-btn">Join Game</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="sidebar">
+        <div id="leaderboard-panel">
+          <h3>Leaderboard</h3>
+          <div id="leaderboard"></div>
+        </div>
+
+        <div id="strategy-panel">
+          <h3>Your Strategy</h3>
+          <div id="current-strategy">No strategy deployed</div>
+          <div id="strategy-status"></div>
+          <select id="strategy-preset">
+            <option value="">— pick a preset —</option>
+            <option value="hunt and kill the smallest snake nearby">🥇 Assassin — hunt smallest snake</option>
+            <option value="zigzag pattern to cover maximum ground">🥈 Zigzag — cover max ground</option>
+            <option value="spiral outward from spawn eating food">🥉 Spiraler — spiral outward</option>
+            <option value="sprint to nearest food, ignore snakes">FoodRacer — sprint to food</option>
+            <option value="eat food left by dead snakes">Opportunist — eat dropped food</option>
+            <option value="find dense food clusters and camp them">Cluster — camp food clusters</option>
+            <option value="hug walls and collect edge food">WallHugger — hug walls</option>
+            <option value="avoid all snakes at all costs, survive">Coward — avoid everyone</option>
+            <option value="cut off escape routes of nearby snakes">Cutoff — block escape routes</option>
+            <option value="chase the highest-scoring snake">BigGameHuntr — chase top snake</option>
+          </select>
+          <textarea id="strategy-input" maxlength="50" placeholder="or type your own strategy…" rows="2"></textarea>
+          <div id="char-count">0 / 50</div>
+          <button id="deploy-btn" disabled>Deploy Strategy</button>
+          <div id="cooldown-wrap">
+            <div id="cooldown-bar"></div>
+          </div>
+        </div>
+
+        <div id="code-panel">
+          <h3>Generated Function <button id="code-toggle" class="toggle-btn">▼ hide</button></h3>
+          <pre id="fn-code">// Deploy a strategy to see Claude's generated code here</pre>
+        </div>
+
+        <div id="killfeed-panel">
+          <h3>Kill Feed</h3>
+          <div id="kill-feed"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
